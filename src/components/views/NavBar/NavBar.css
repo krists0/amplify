@@ -1,0 +1,75 @@
+/* .Appbar{
+    position : absolute;
+   width: 100% !important;
+  
+   
+} */
+.appbar-container{
+    background: rgb(255, 243, 214);
+    
+    /* background: rgb(150, 108, 11) */
+    
+}
+/* .appbar-typography{
+    
+    display: flex;
+    color: rgb(50, 113, 45);  
+    font-family: monospace;  
+    letter-spacing: ".3rem";      
+             
+              
+              
+} */
+.logo{
+    width: 59px;
+    height: 59px;
+}
+@media (max-width: 767px) {
+    .appbar-typography{
+    
+        display: flex;
+        color: rgb(50, 113, 45);  
+        font-family: monospace;  
+        letter-spacing: ".3rem";         
+                  
+                  
+    }
+}
+
+/* NavBar.css */
+
+/* Style for the entire AppBar */
+.Appbar {
+    position : absolute;
+    width: 100% !important;
+  }
+  
+  /* Style for the Typography component (Hanna Avia) */
+  .appbar-typography {
+    display: flex;
+    color: rgb(50, 113, 45);  
+    font-family: monospace;  
+    letter-spacing: ".3rem";     
+  }
+  
+  /* Style for the links in the NavBar */
+  .nav-link {
+    margin-right: 20px; /* Add space between links */
+    text-decoration: none;
+    color: #000; /* Set the link color as needed */
+  }
+  
+  /* Style for the active link */
+  .active {
+    font-weight: bold; /* Make the active link bold, or customize as needed */
+  }
+  
+  /* Media query to adjust spacing for smaller screens */
+  @media (max-width: 768px) {
+    .nav-link {
+      margin-right: 10px; /* Reduce spacing for smaller screens */
+    }
+  }
+  
+  /* Additional styles for other elements can be added as needed */
+  

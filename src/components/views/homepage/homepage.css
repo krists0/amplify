@@ -1,0 +1,29 @@
+.homepage{
+	
+	
+	max-width:100%;
+	display: flex;
+	
+	
+}
+#background-video{
+
+	height: 100%;
+	width: 100%;
+	float: left;
+	top: 0;
+	padding: none;
+	
+}
+@media (max-width: 767px) {
+	
+	#background-video{
+
+		height: 100%;
+		width: 100%;
+		float: left;
+		
+		padding-top: 45px !important;
+		
+	}
+}

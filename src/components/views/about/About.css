@@ -1,0 +1,65 @@
+/* .About{
+    margin-top: 7%;
+    margin-bottom: 10%;
+   
+}
+.img_hanna{
+    max-width: 400px;
+    max-height: 500px;
+}
+.About .mySwiper{
+    max-width: 400px;
+    max-height: 500px;
+}
+
+@media (max-width: 767px) {
+    .About .mySwiper{
+       max-width: 25%;
+       
+    }
+   
+} */
+.About {
+    margin-top: 7%;
+    margin-bottom: 10%;
+    
+}
+
+.img_hanna {
+    /* max-width: 100%; 
+    max-height: auto;  */
+    max-width: 500px;
+    max-height: auto;
+}
+
+.About .mySwiper {
+    max-width: 500px; /* Adjusted max-width for responsive images */
+    max-height: auto; /* Added max-height: auto to maintain aspect ratio */
+}
+@media (max-width: 767px) {
+    .About {
+        margin-top: 5%; /* Adjusted margins for better mobile layout */
+        margin-bottom: 5%;
+    }
+
+    .img_hanna {
+        max-width: 350px; /* Make the image take up the full width */
+        max-height: auto; /* Added max-height: auto to maintain aspect ratio */
+    }
+
+    .About .mySwiper {
+        max-width: 350px; /* Make the image take up the full width */
+        max-height: auto; /* Added max-height: auto to maintain aspect ratio */
+    }
+
+    .about-text {
+        font-size: 15px !important;
+        padding-top: 0px !important; /* Reduced padding-top to move text closer to the image */
+    }
+}
+.about-text{
+   font-size: 19px ;
+   padding-top: 60px;
+}
+
+
