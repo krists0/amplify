@@ -91,18 +91,33 @@
 
 
 import React, { useRef, useState } from "react";
-// Import Swiper React components
 // import { Swiper, SwiperSlide } from "swiper/react";
+// import "swiper/swiper-bundle.css"; // Import the Swiper styles
+
 import Typography from '@mui/material/Typography';
-// Import Swiper styles
+
 // import "swiper/css";
 // import "swiper/css/effect-coverflow";
 // import "swiper/css/pagination";
 
 import "../collection/Collection.css";
+// import SwiperCore, { EffectCoverflow, Pagination } from 'swiper';
+
+// import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+
+// import { Swiper, SwiperSlide } from 'swiper/react';
+
+// // Import Swiper styles
+// import 'swiper/css';
+// import 'swiper/css/navigation';
+// import 'swiper/css/pagination';
+// import 'swiper/css/scrollbar';
+
+// SwiperCore.use([EffectCoverflow, Pagination]);
+
 
 // import required modules
-// import { EffectCoverflow, Pagination } from "swiper";
+
 
 
 export default function Collection() {
@@ -128,6 +143,24 @@ export default function Collection() {
     }}
       >Idans Collection </Typography>
       <Typography textAlign="center" variant="h5"  color="#13c5a1" padding="5px">Hanna Avia design</Typography>
+      {/* <Swiper
+      // install Swiper modules
+      modules={[Navigation, Pagination, Scrollbar, A11y]}
+      spaceBetween={50}
+      slidesPerView={3}
+      navigation
+      pagination={{ clickable: true }}
+      scrollbar={{ draggable: true }}
+      onSwiper={(swiper) => console.log(swiper)}
+      onSlideChange={() => console.log('slide change')}
+    >
+      <SwiperSlide>Slide 1</SwiperSlide>
+      <SwiperSlide>Slide 2</SwiperSlide>
+      <SwiperSlide>Slide 3</SwiperSlide>
+      <SwiperSlide>Slide 4</SwiperSlide>
+     
+    </Swiper>
+        */}
         {/* <Swiper
         loop={true}
           effect={"coverflow"}
