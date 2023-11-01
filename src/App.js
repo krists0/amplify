@@ -41,7 +41,7 @@ function App() {
      
       <NavBar />
       <HomePage></HomePage><Element name="collection">
-        <Collection />
+        {/* <Collection /> */}
       </Element>
       <Element name="about">
         {/* <About /> */}
