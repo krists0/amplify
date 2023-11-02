@@ -212,6 +212,8 @@ const Collection = () => {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    
+    
   };
 
   const carouselProps = {
@@ -219,7 +221,12 @@ const Collection = () => {
     interval: 4000, // Autoplay interval in milliseconds (5 seconds in this case)
     infiniteLoop: true, // Enable infinite looping
     centerMode: true, // Center the images
-    
+  
+    showStatus: false, // Remove status bar
+    // showIndicators: false, // Remove indicators
+    showThumbs: false, // Remove thumbnails
+    showArrows: true,
+    dynamicHeight: false, // Disable dynamic height
   };
 
   return (
@@ -235,9 +242,10 @@ const Collection = () => {
           <Carousel showArrows={true} {...carouselProps}>
             {imgs.map((img, index) => (
               <div key={index}>
-                <Card style={{display:'flex',alignItems: 'center',
+                <Card style={{display:'flex',alignItems: 'center',borderBlockColor:'white',
+
     justifyContent: 'center',}}>
-                  <CardContent style={carouselStyle}>
+                  <CardContent className="carusel-card" style={carouselStyle}>
                     <img src={img} alt={`Image ${index}`} width="100%" />
                   </CardContent>
                 </Card>

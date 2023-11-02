@@ -27,7 +27,7 @@ import * as React from 'react';
 import HomePage from './components/views/homepage/HomePage.js';
 import Collection from './components/views/collection/Collection.js';
 import NavBar from './components/views/NavBar/NavBar.js';
-// import About from './components/views/about/About.js';
+import About from './components/views/about/About.js';
 import Contact from './components/views/contact/Contact.js';
 import VidDivider from './components/views/vidDivider/VidDivider.js';
 import Footer from './components/views/footer/Footer.js';
@@ -40,11 +40,12 @@ function App() {
     <div  className='App'>
      
       <NavBar />
-      <HomePage></HomePage><Element name="collection">
+      <HomePage></HomePage>
+      <Element name="collection">
         <Collection></Collection>
       </Element>
       <Element name="about">
-        {/* <About /> */}
+        <About />
       </Element>
       <Element name="itemList">
         {/* <ItemList /> */}
@@ -52,7 +53,7 @@ function App() {
 
       <VidDivider></VidDivider>
       <Element name="contact">
-        {/* <Contact /> */}
+        <Contact />
       </Element>
   
 
