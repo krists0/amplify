@@ -89,9 +89,106 @@
 // }
 
 
+// import React from "react";
+// import Typography from "@mui/material/Typography";
+// import Paper from "@mui/material/Paper";
+// import Grid from "@mui/material/Grid";
+// import Card from "@mui/material/Card";
+// import CardContent from "@mui/material/CardContent";
+
+// const imgs = [
+//   'https://i.imgur.com/0yrTGrf.jpg',
+//   'https://i.imgur.com/4wRFLjc.jpg',
+//   'https://i.imgur.com/N6GEDJv.jpg',
+//   'https://i.imgur.com/BkNdLx0.jpg',
+//   'https://i.imgur.com/sw9rKtX.jpg',
+//   'https://i.imgur.com/zAM3bAD.jpg',
+//   'https://i.imgur.com/vYfFaOK.jpg',
+//   'https://i.imgur.com/c1DZbh0.jpg',
+//   'https://i.imgur.com/iIvENGe.jpg'
+// ];
+
+// const Collection = () => {
+//   return (
+//     <div>
+//       <Typography variant="h4" className="header">
+//         Idans Collection
+//       </Typography>
+//       <Typography variant="h5" color="#13c5a1" padding="5px">
+//         Hanna Avia design
+//       </Typography>
+//       <Grid container spacing={3}>
+//         {imgs.map((img, index) => (
+//           <Grid item xs={12} sm={6} md={4} key={index}>
+//             <Paper>
+//               <Card>
+//                 <CardContent>
+//                   <img src={img} alt={`Image ${index}`} width="100%" />
+//                 </CardContent>
+//               </Card>
+//             </Paper>
+//           </Grid>
+//         ))}
+//       </Grid>
+//     </div>
+//   );
+// };
+
+// // export default Collection;
+// import React from "react";
+// import Typography from "@mui/material/Typography";
+// import { Carousel } from "react-responsive-carousel";
+// import "react-responsive-carousel/lib/styles/carousel.min.css";
+// import Grid from "@mui/material/Grid";
+// import Card from "@mui/material/Card";
+// import CardContent from "@mui/material/CardContent";
+
+// const imgs = [
+//   'https://i.imgur.com/0yrTGrf.jpg',
+//   'https://i.imgur.com/4wRFLjc.jpg',
+//   'https://i.imgur.com/N6GEDJv.jpg',
+//   'https://i.imgur.com/BkNdLx0.jpg',
+//   'https://i.imgur.com/sw9rKtX.jpg',
+//   'https://i.imgur.com/zAM3bAD.jpg',
+//   'https://i.imgur.com/vYfFaOK.jpg',
+//   'https://i.imgur.com/c1DZbh0.jpg',
+//   'https://i.imgur.com/iIvENGe.jpg'
+// ];
+
+// const Collection = () => {
+//   return (
+//     <div>
+//       <Typography variant="h4" className="header">
+//         Idans Collection
+//       </Typography>
+//       <Typography variant="h5" color="#13c5a1" padding="5px">
+//         Hanna Avia design
+//       </Typography>
+//       <Grid container spacing={3}>
+//         <Grid item xs={12}>
+//           <Carousel showArrows={true}>
+//             {imgs.map((img, index) => (
+//               <div key={index}>
+//                 <Card>
+//                   <CardContent>
+//                     <img src={img} alt={`Image ${index}`} width="100%" />
+//                   </CardContent>
+//                 </Card>
+//               </div>
+//             ))}
+//           </Carousel>
+//         </Grid>
+//       </Grid>
+//     </div>
+//   );
+// };
+
+// export default Collection;
+
 import React from "react";
 import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -109,6 +206,22 @@ const imgs = [
 ];
 
 const Collection = () => {
+  const carouselStyle = {
+    width: '480px', // Set your desired width
+    height: '480px', // Set your desired height
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  };
+
+  const carouselProps = {
+    autoPlay: true, // Enable autoplay
+    interval: 4000, // Autoplay interval in milliseconds (5 seconds in this case)
+    infiniteLoop: true, // Enable infinite looping
+    centerMode: true, // Center the images
+    
+  };
+
   return (
     <div>
       <Typography variant="h4" className="header">
@@ -118,17 +231,20 @@ const Collection = () => {
         Hanna Avia design
       </Typography>
       <Grid container spacing={3}>
-        {imgs.map((img, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            <Paper>
-              <Card>
-                <CardContent>
-                  <img src={img} alt={`Image ${index}`} width="100%" />
-                </CardContent>
-              </Card>
-            </Paper>
-          </Grid>
-        ))}
+        <Grid item xs={12}>
+          <Carousel showArrows={true} {...carouselProps}>
+            {imgs.map((img, index) => (
+              <div key={index}>
+                <Card style={{display:'flex',alignItems: 'center',
+    justifyContent: 'center',}}>
+                  <CardContent style={carouselStyle}>
+                    <img src={img} alt={`Image ${index}`} width="100%" />
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
+          </Carousel>
+        </Grid>
       </Grid>
     </div>
   );
