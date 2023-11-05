@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { Container } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { Card ,CardMedia,CardContent,Typography,Button,TextField,}  from '@mui/material';
-
+import { API } from "aws-amplify";
+import { createProduct } from '../../../graphql/mutations';
 
 const ItemList = () => {
   const [items, setItems] = useState([]);
@@ -25,6 +26,7 @@ const ItemList = () => {
     updatedItems[index] = updatedItem;
     setItems(updatedItems);
   };
+
 
   return (
     <>

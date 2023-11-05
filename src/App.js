@@ -35,6 +35,9 @@ import { Container } from '@mui/material';
 import ItemList from './components/views/Item/ItemList.js';
 import { Element } from 'react-scroll';
 import "../src/App.css";
+import { Amplify, API, graphqlOperation } from 'aws-amplify';
+import awsconfig from './aws-exports';
+Amplify.configure(awsconfig);
 function App() {
   return (
     <div  className='App'>
@@ -48,7 +51,7 @@ function App() {
         <About />
       </Element>
       <Element name="itemList">
-        {/* <ItemList /> */}
+        <ItemList />
       </Element>
 
       <VidDivider></VidDivider>
