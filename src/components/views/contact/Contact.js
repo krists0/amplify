@@ -141,7 +141,7 @@ export default function Contact(){
     return(
         <>
        <div className="contact">
-        <Typography variant='h3' textAlign="center" className="header"
+        <Typography style={{fontSize: '2.125rem',}} variant='h3' textAlign="center" className="header"
             paddingTop="10%" color="#13c5a1">Contact</Typography>
         
         <Paper
