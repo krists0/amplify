@@ -7,7 +7,7 @@ import { onCreateProduct } from '../../../graphql/subscriptions';
 import { listProducts } from '../../../graphql/queries';
 import { createProduct, updateProduct, deleteProduct } from '../../../graphql/mutations';
 
-const ItemList = () => {
+const ItemList = ({ userRole }) => {
   const [items, setItems] = useState([]);
   const [newItem, setNewItem] = useState({ title: '', description: '', price: '', img: '' });
   const [isUpdating, setIsUpdating] = useState(false);
@@ -126,47 +126,54 @@ const ItemList = () => {
           <Grid item xs={12} sm={6} md={4} key={item.id}>
             <Card style={cardStyle}>
               <CardMedia component="img" alt={item.title} style={imgStyle} image={item.img} />
-              <CardContent>
-                <Typography variant="h6">{item.title}</Typography>
-                <Typography variant="body2" color="textSecondary">
-                  {item.description}
-                </Typography>
-                <Typography variant="h5">${item.price}</Typography>
-                <Button onClick={() => handleDeleteItem(index, item.id)}>Delete</Button>
-                <Button onClick={() => handleEditItem(item)}>Edit</Button>
-              </CardContent>
+              <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+  <Typography variant="h6">{item.title}</Typography>
+  <Typography variant="body2" color="textSecondary">
+    {item.description}
+  </Typography>
+  <Typography variant="h5">${item.price}</Typography>
+  {userRole === 'Manager' && (
+    <Button onClick={() => handleDeleteItem(index, item.id)}>Delete</Button>
+  )}
+  {userRole === 'Manager' && (
+    <Button onClick={() => handleEditItem(item)}>Edit</Button>
+  )}
+</CardContent>
             </Card>
           </Grid>
         ))}
       </Grid>
-
+      
+      {userRole === 'Manager' && (
         <form style={{paddingTop:'5%'}}>
-          <TextField
-            label="Title"
-            value={newItem.title}
-            onChange={(e) => setNewItem({ ...newItem, title: e.target.value })}
-          />
-          <TextField
-            label="Description"
-            value={newItem.description}
-            onChange={(e) => setNewItem({ ...newItem, description: e.target.value })}
-          />
-          <TextField
-            label="Price (in dollars)"
-            value={newItem.price}
-            onChange={(e) => setNewItem({ ...newItem, price: e.target.value })}
-          />
-          <TextField
-            label="Image URL"
-            value={newItem.img}
-            onChange={(e) => setNewItem({ ...newItem, img: e.target.value })}
-          />
-          {isUpdating ? (
-            <Button onClick={() => handleUpdateItem(selectedProductId)}>Update Item</Button>
-          ) : (
-            <Button onClick={handleAddItem}>Add Item</Button>
-          )}
-        </form>
+        <TextField
+          label="Title"
+          value={newItem.title}
+          onChange={(e) => setNewItem({ ...newItem, title: e.target.value })}
+        />
+        <TextField
+          label="Description"
+          value={newItem.description}
+          onChange={(e) => setNewItem({ ...newItem, description: e.target.value })}
+        />
+        <TextField
+          label="Price (in dollars)"
+          value={newItem.price}
+          onChange={(e) => setNewItem({ ...newItem, price: e.target.value })}
+        />
+        <TextField
+          label="Image URL"
+          value={newItem.img}
+          onChange={(e) => setNewItem({ ...newItem, img: e.target.value })}
+        />
+        {isUpdating ? (
+          <Button onClick={() => handleUpdateItem(selectedProductId)}>Update Item</Button>
+        ) : (
+          <Button onClick={handleAddItem}>Add Item</Button>
+        )}
+      </form>
+      )}
+        
       </Container>
     </>
   );

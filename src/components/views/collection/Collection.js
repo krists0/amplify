@@ -231,10 +231,14 @@ const Collection = () => {
 
   return (
     <div>
-      <Typography variant="h4" className="header">
+      <Typography style={{display:'flex',alignItems: 'center',
+
+justifyContent: 'center'}} variant="h4" className="header">
         Idans Collection
       </Typography>
-      <Typography variant="h5" color="#13c5a1" padding="5px">
+      <Typography style={{display:'flex',alignItems: 'center',
+
+justifyContent: 'center'}} variant="h5" color="#13c5a1" padding="5px">
         Hanna Avia design
       </Typography>
       <Grid container spacing={3}>
