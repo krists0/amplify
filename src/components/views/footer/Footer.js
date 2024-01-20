@@ -9,8 +9,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary">
       {'Copyright © Kristina Tsiviliov'}
-      <Link color="inherit" href="https://www.linkedin.com/in/kristina-tsivilov-861205135/">
-        Linkedin
+      <Link color="inherit" href="https://mui.com/">
+        Your Website
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -52,7 +52,7 @@ export default function Footer() {
       >
         <Container maxWidth="sm">
           <Typography variant="body1">
-            Hanna AviA 
+            Hanna Avia
           </Typography>
           <Copyright />
         </Container>
