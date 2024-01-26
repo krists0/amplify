@@ -204,7 +204,7 @@ export default function Contact(){
                     variant="h6"  fontSize="1.2rem" gutterBottom>
                        
                            
-                                    Hannaaviah@gmail.com
+                       annarudnaia1517@gmail.com
 {/* 
                                 <Typography
               variant="body2" color="rgb(110, 205, 173)" mt="5%">

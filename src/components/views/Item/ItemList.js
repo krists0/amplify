@@ -1,4 +1,5 @@
 
+
 // import React, { useState, useEffect } from 'react';
 // import { Container } from '@mui/material';
 // import Grid from '@mui/material/Grid';
@@ -17,25 +18,30 @@
 //     img: '', // Main image URL
 //   });
 //   const [isUpdating, setIsUpdating] = useState(false);
-//   const [selectedProductId, setSelectedProductId] = useState(0); // Changed to 0 for the first item
-//   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+//   const [selectedProductId, setSelectedProductId] = useState(0);
+//   const [imageIndices, setImageIndices] = useState([]); // Array to store image indices for each item
 //   const [multipleImagesInput, setMultipleImagesInput] = useState('');
 
-//   const handleNextImage = () => {
-//     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % items[selectedProductId].img.split(',').length);
+//   const handleNextImage = (index) => {
+//     setImageIndices((prevIndices) => [
+//       ...prevIndices.slice(0, index),
+//       (prevIndices[index] + 1) % items[index].img.split(',').length,
+//       ...prevIndices.slice(index + 1),
+//     ]);
 //   };
 
-//   const handlePrevImage = () => {
-//     setCurrentImageIndex(
-//       (prevIndex) =>
-//         (prevIndex - 1 + items[selectedProductId].img.split(',').length) % items[selectedProductId].img.split(',').length
-//     );
+//   const handlePrevImage = (index) => {
+//     setImageIndices((prevIndices) => [
+//       ...prevIndices.slice(0, index),
+//       (prevIndices[index] - 1 + items[index].img.split(',').length) % items[index].img.split(',').length,
+//       ...prevIndices.slice(index + 1),
+//     ]);
 //   };
 
 //   const handleAddImage = () => {
 //     if (newItem.img) {
 //       setItems((prevItems) => [...prevItems, { ...newItem }]);
-//       setCurrentImageIndex(0); // Reset the current image index when a new item is added
+//       setImageIndices((prevIndices) => [...prevIndices, 0]); // Initialize index for the new item
 //       setNewItem({ ...newItem, img: '' });
 //     }
 //   };
@@ -43,9 +49,7 @@
 //   const handleAddMultipleImages = () => {
 //     const newImages = multipleImagesInput.split(',').map((url) => url.trim()).filter(Boolean);
 
-//     const updatedImages = newItem.img
-//       ? `${newItem.img},${newImages.join(',')}`
-//       : newImages.join(',');
+//     const updatedImages = newItem.img ? `${newItem.img},${newImages.join(',')}` : newImages.join(',');
 
 //     setNewItem({ ...newItem, img: updatedImages });
 //     setMultipleImagesInput('');
@@ -56,6 +60,8 @@
 //       const productData = await API.graphql({ query: listProducts });
 //       const productList = productData.data.listProducts.items;
 //       setItems(productList);
+//       // Initialize image indices for each item
+//       setImageIndices(productList.map(() => 0));
 //     } catch (error) {
 //       console.error('Error fetching products', error);
 //     }
@@ -68,6 +74,7 @@
 //       next: ({ value }) => {
 //         const newProduct = value.data.onCreateProduct;
 //         setItems((prevItems) => [...prevItems, newProduct]);
+//         setImageIndices((prevIndices) => [...prevIndices, 0]);
 //       },
 //     });
 
@@ -112,7 +119,7 @@
 //       setItems(updatedItems);
 //       setIsUpdating(false);
 //       setSelectedProductId(0);
-//       setCurrentImageIndex(0);
+//       setImageIndices((prevIndices) => [...prevIndices.slice(0, selectedProductId), 0, ...prevIndices.slice(selectedProductId + 1)]);
 //       setNewItem({ title: '', description: '', price: '', img: '' });
 //     } catch (error) {
 //       console.error('Error updating product', error);
@@ -127,6 +134,7 @@
 //       });
 //       const updatedItems = items.filter((item) => item.id !== productId);
 //       setItems(updatedItems);
+//       setImageIndices((prevIndices) => [...prevIndices.slice(0, index), ...prevIndices.slice(index + 1)]);
 //     } catch (error) {
 //       console.error('Error deleting product', error);
 //     }
@@ -135,7 +143,6 @@
 //   const handleEditItem = (index) => {
 //     setIsUpdating(true);
 //     setSelectedProductId(index);
-//     setCurrentImageIndex(0);
 //     setNewItem({
 //       title: items[index].title,
 //       description: items[index].description,
@@ -169,14 +176,14 @@
 //                 component="img"
 //                 alt={item.title}
 //                 style={imgStyle}
-//                 image={item.img && item.img.split(',')[currentImageIndex % item.img.split(',').length].trim()}
+//                 image={item.img && item.img.split(',')[imageIndices[index]].trim()}
 //               />
 
 //               {item.img && item.img.split(',').length > 1 && (
 //                 <div style={{ paddingTop: '1%' }}>
 //                   <Button onClick={() => handlePrevImage(index)}>Previous Image</Button>
 //                   <span style={{ margin: '0 10px' }}>
-//                     Image {currentImageIndex % item.img.split(',').length + 1}/{item.img.split(',').length}
+//                     Image {imageIndices[index] + 1}/{item.img.split(',').length}
 //                   </span>
 //                   <Button onClick={() => handleNextImage(index)}>Next Image</Button>
 //                 </div>
@@ -239,6 +246,7 @@
 
 // export default ItemList;
 
+
 import React, { useState, useEffect } from 'react';
 import { Container } from '@mui/material';
 import Grid from '@mui/material/Grid';
@@ -261,6 +269,9 @@ const ItemList = ({ userRole }) => {
   const [imageIndices, setImageIndices] = useState([]); // Array to store image indices for each item
   const [multipleImagesInput, setMultipleImagesInput] = useState('');
 
+
+
+  
   const handleNextImage = (index) => {
     setImageIndices((prevIndices) => [
       ...prevIndices.slice(0, index),
@@ -346,13 +357,28 @@ const ItemList = ({ userRole }) => {
     }
   };
 
+ 
+
   const handleUpdateItem = async () => {
     try {
+      const currentItem = items[selectedProductId];
+  
+      if (!currentItem) {
+        console.error('Item not found for update');
+        return;
+      }
+  
       const updatedProduct = await API.graphql({
         query: updateProduct,
-        variables: { input: { id: selectedProductId, ...newItem } },
+        variables: {
+          input: {
+            id: currentItem.id, // Use the ID of the existing item for update
+            ...newItem,
+          },
+        },
+        // No need for a condition check in this case
       });
-
+  
       const updatedItems = [...items];
       updatedItems[selectedProductId] = updatedProduct.data.updateProduct;
       setItems(updatedItems);
@@ -362,8 +388,30 @@ const ItemList = ({ userRole }) => {
       setNewItem({ title: '', description: '', price: '', img: '' });
     } catch (error) {
       console.error('Error updating product', error);
+  
+      // Handle specific error types
+      if (error.errors && error.errors.length > 0) {
+        const firstError = error.errors[0];
+        if (firstError.errorType === 'DynamoDB:ConditionalCheckFailedException') {
+          console.error('Conditional check failed. The item may have been modified by another process.');
+        }
+        // Handle other error types if needed
+      }
     }
   };
+  
+
+  const handleEditItem = (index) => {
+    setIsUpdating(true);
+    setSelectedProductId(index);
+    setNewItem({
+      title: items[index].title,
+      description: items[index].description,
+      price: items[index].price,
+      img: items[index].img,
+    });
+  };
+
 
   const handleDeleteItem = async (index, productId) => {
     try {
@@ -379,16 +427,7 @@ const ItemList = ({ userRole }) => {
     }
   };
 
-  const handleEditItem = (index) => {
-    setIsUpdating(true);
-    setSelectedProductId(index);
-    setNewItem({
-      title: items[index].title,
-      description: items[index].description,
-      price: items[index].price,
-      img: items[index].img,
-    });
-  };
+  
 
   const cardStyle = {
     height: '100%',
@@ -398,7 +437,7 @@ const ItemList = ({ userRole }) => {
 
   const imgStyle = {
     objectFit: 'cover',
-    height: '100%',
+    height: '400px', // Set a fixed height for the images
   };
 
   return (
@@ -448,34 +487,60 @@ const ItemList = ({ userRole }) => {
 
       {userRole === 'Manager' && (
         <form style={{ paddingTop: '5%' }}>
+          <Typography variant="h5">Add/Edit Item</Typography>
           <TextField
             label="Title"
             value={newItem.title}
             onChange={(e) => setNewItem({ ...newItem, title: e.target.value })}
+            fullWidth
+            margin="normal"
           />
           <TextField
             label="Description"
             value={newItem.description}
             onChange={(e) => setNewItem({ ...newItem, description: e.target.value })}
+            fullWidth
+            margin="normal"
+            multiline
+            rows={4}
           />
           <TextField
             label="Price (in dollars)"
             value={newItem.price}
             onChange={(e) => setNewItem({ ...newItem, price: e.target.value })}
+            fullWidth
+            margin="normal"
+            type="number"
+            InputProps={{ inputProps: { min: 0 } }}
           />
-          <Button onClick={handleAddImage}>Add Main Image</Button>
+          <TextField
+            label="Main Image URL"
+            value={newItem.img}
+            onChange={(e) => setNewItem({ ...newItem, img: e.target.value })}
+            fullWidth
+            margin="normal"
+          />
 
           <TextField
             label="Multiple Image URLs (comma-separated)"
             value={multipleImagesInput}
             onChange={(e) => setMultipleImagesInput(e.target.value)}
+            fullWidth
+            margin="normal"
           />
-          <Button onClick={handleAddMultipleImages}>Add Multiple Images</Button>
+          <Button onClick={handleAddMultipleImages} variant="outlined" color="primary">
+            Add Multiple Images
+          </Button>
 
           {isUpdating ? (
-            <Button onClick={handleUpdateItem}>Update Item</Button>
+            
+            <Button onClick={handleUpdateItem} variant="contained" color="primary" style={{ marginTop: '1rem' }}>
+              Update Item
+            </Button>
           ) : (
-            <Button onClick={handleAddItem}>Add Item</Button>
+            <Button onClick={handleAddItem} variant="contained" color="primary" style={{ marginTop: '1rem' }}>
+              Add Item
+            </Button>
           )}
         </form>
       )}
