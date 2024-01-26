@@ -255,7 +255,8 @@ import { API } from 'aws-amplify';
 import { onCreateProduct } from '../../../graphql/subscriptions';
 import { listProducts } from '../../../graphql/queries';
 import { createProduct, updateProduct, deleteProduct } from '../../../graphql/mutations';
-
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 const ItemList = ({ userRole }) => {
   const [items, setItems] = useState([]);
   const [newItem, setNewItem] = useState({
@@ -457,15 +458,19 @@ const ItemList = ({ userRole }) => {
                 image={item.img && item.img.split(',')[imageIndices[index]].trim()}
               />
 
-              {item.img && item.img.split(',').length > 1 && (
-                <div style={{ paddingTop: '1%' }}>
-                  <Button onClick={() => handlePrevImage(index)}>Previous Image</Button>
-                  <span style={{ margin: '0 10px' }}>
-                    Image {imageIndices[index] + 1}/{item.img.split(',').length}
-                  </span>
-                  <Button onClick={() => handleNextImage(index)}>Next Image</Button>
-                </div>
-              )}
+{item.img && item.img.split(',').length > 1 && (
+  <div style={{ paddingTop: '1%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <Button onClick={() => handlePrevImage(index)} style={{ marginRight: '10px' }}>
+      <ChevronLeftIcon />
+    </Button>
+    <span style={{ margin: '0 10px' }}>
+      Image {imageIndices[index] + 1}/{item.img.split(',').length}
+    </span>
+    <Button onClick={() => handleNextImage(index)}>
+      <ChevronRightIcon />
+    </Button>
+  </div>
+)}
 
               <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <Typography variant="h6">{item.title}</Typography>
