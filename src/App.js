@@ -178,7 +178,7 @@ function App() {
           <Route path="/products" element={<ItemList />} />
         </Routes>
       
-        <HomePage />
+        {/* <HomePage /> */}
         <Element name="collection">
           <Collection />
         </Element>
