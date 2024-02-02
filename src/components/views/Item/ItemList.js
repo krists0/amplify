@@ -11,6 +11,8 @@ import { createProduct, updateProduct, deleteProduct } from '../../../graphql/mu
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import IconButton from '@mui/material/IconButton';
+
 const ItemList = ({ userRole }) => {
   const [items, setItems] = useState([]);
   const [newItem, setNewItem] = useState({
@@ -290,11 +292,15 @@ const ItemList = ({ userRole }) => {
                 {userRole === 'Manager' && (
                   <Button onClick={() => handleEditItem(index)}>Edit</Button>
                 )}
-                <div style={{ marginTop: 'auto', paddingBottom: '1rem' }}>
+                  <IconButton onClick={() => handleWhatsAppClick(item.title, item.description)} 
+                  style={{ marginTop: 'auto', paddingBottom: '1rem' , fontSize: '2.5rem', marginBottom: '5px', color: '#25D366' }}>
+    <WhatsAppIcon />
+  </IconButton>
+                {/* <div style={{ marginTop: 'auto', paddingBottom: '1rem' , color: '#25D366' }}>
                   <Button onClick={() => handleWhatsAppClick(item.title, item.description)}>
                     <WhatsAppIcon />
                   </Button>
-                </div>
+                </div> */}
               </CardContent>
             </Card>
           </Grid>
