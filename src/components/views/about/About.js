@@ -48,19 +48,20 @@ export default function About() {
       >
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
-            <ImageContainer>
-              <Carousel {...carouselProps}>
-                <div className='img_hanna'>
-                  <img alt="complex" src="https://i.imgur.com/qPJtnnp.jpeg" />
-                </div>
-                {/* <div className='img_hanna'>
-                  <img alt="complex" src="https://i.imgur.com/6vmFney.jpeg" />
-                </div> */}
-                <div className='img_hanna2'>
-                  <img alt="complex" src="https://i.ibb.co/JBQrxRf/Snapinsta-app-386512451-18385566877014809-5850383102881503257-n-1080.jpg" />
-                </div>
-              </Carousel>
-            </ImageContainer>
+          <ImageContainer>
+  <Carousel {...carouselProps}>
+    <div className='img_hanna'>
+      <img alt="complex" src="https://i.imgur.com/qPJtnnp.jpeg" style={{ width: '120%', height: '100%' }} />
+    </div>
+    {/* <div className='img_hanna'>
+      <img alt="complex" src="https://i.imgur.com/6vmFney.jpeg" style={{ width: '100%', height: '100%' }} />
+    </div> */}
+    <div className='img_hanna2'>
+      <img alt="hanna" src="https://i.imgur.com/ZJCBVzn.jpg" style={{ width: '90%', height: '100%' }} />
+    </div>
+  </Carousel>
+</ImageContainer>
+
           </Grid>
           <Grid item xs={12} sm={6}>
             <Typography className='about-text' gutterBottom>
